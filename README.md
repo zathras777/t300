@@ -44,6 +44,32 @@ The currently configured date & time are available on register 200-206.
 
 The python script presently queries for known setpoints and the date/time and dumps the data to the terminal. It is a work in progress :-)
 
+``` shell
+$ python3 ./t300.py
+HPW 300 Information:
+  Date/Time Reported:  Monday 21/11/2022 @ 16:08 
+  Setpoints:
+    D01                                  44.1 C
+    D07                                  -1 C
+
+    F03                                  -15.0 C
+    F04                                  Off 
+    F05                                  35.0 C
+    F06                                  21.0 C
+    F07                                  5.0 
+    F08                                  60.0 C
+    F09                                  40 Pa
+    F14  ModBus Unit ID                  20 
+    F15  ModBus Baud Rate                19200 
+    F16  ModBus Parity                   Even 
+    F23                                  5.0 V
+    F24                                  5.0 V
+    F25                                  15 %
+    F26                                  Off 
+    F27                                  30 %
+    F28                                  100 %
+```
+
 ## Future Plans
 
 I am hoping to resolve more of the registers and add them to the script.

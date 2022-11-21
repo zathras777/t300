@@ -21,6 +21,10 @@ setpoints:dict = {
     "F14": [36, 3, "INT"],
     "F15": [37, 3, "IDX", {0: 9600, 1: 19200}],
     "F16": [38, 3, "IDX", {0: 'None', 1: 'Even', 2: 'Odd'}],
+    "F23": [89, 3, "FLOAT", 1],
+    "F24": [90, 3, "FLOAT", 1],
+    "F25": [91, 3, "INT"],
+    "F26": [92, 3, "BOOL"],
     "F27": [4, 3, "INT"],
     "F28": [5, 3, "INT"],
 }
@@ -40,6 +44,9 @@ setpoint_units:dict = {
     "F08": "C",
     "F09": "Pa",
     "F10": "Pa",
+    "F23": "V",
+    "F24": "V",
+    "F25": "%",
     "F27": "%",
     "F28": "%"
 }
@@ -130,7 +137,7 @@ class HPW300:
         self.update_values()
         tm = self.get_time()
         print("HPW 300 Information:")
-        print(f"  Date/Time Reported:  {tm['Weekday']} {tm['Day']}/{tm['Month']}/{tm['Year']} @ {tm['Hour']}:{tm['Mins']} ")
+        print(f"  Date/Time Reported:  {tm['Weekday']} {tm['Day']}/{tm['Month']}/{tm['Year']} @ {tm['Hour']}:{tm['Mins']:02d} ")
         print("  Setpoints:")
         prev = ''
         for key in sorted(self.values):
