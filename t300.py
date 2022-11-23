@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import minimalmodbus
+import json
 
 # Each setpoint we are interested in is listed below with a list containing
 #  - register number
@@ -9,6 +10,7 @@ import minimalmodbus
 #  - number of decimals in the number
 #  - offset to apply or the dict of index values
 setpoints:dict = {
+    "A": [2, 3, "BOOL"],
     "B": [79, 4, "FLOAT", 1],
     "C": [1, 3, "BOOL"],
     "D01": [3, 3, "FLOAT", 1],
@@ -38,6 +40,8 @@ setpoints:dict = {
     "F16": [38, 3, "IDX", {0: 'None', 1: 'Even', 2: 'Odd'}],
     "F17": [39, 3, "BOOL"],
     "F18": [81, 3, "BOOL"],
+    "F19": [51, 3, "INT"],
+    "F22": [88, 3, "IDX", {0: 'Off', 1: 'PV', 2: 'SG'}],
     "F23": [89, 3, "FLOAT", 1],
     "F24": [90, 3, "FLOAT", 1],
     "F25": [91, 3, "INT"],
@@ -93,6 +97,13 @@ setpoint_descriptions:dict = {
     "F16": "ModBus Parity",
     "F17": "Modbus Write Enabled",
     "F18": "USB Enabled",
+    "F19": "Display Contrast",
+    "F20": "Default Settings",
+    "F21": "Service Mode",
+    "F22": "PV Mode",
+    "F23": "PV Heat Rod Voltage",
+    "F24": "PV WP",
+    "F25": "PV WP Time",
     "F26": "Enable Fan Speed 1 and 2",
     "F27": "Fan Speed 1",
     "F28": "Fan Speed 2",
@@ -115,7 +126,7 @@ setpoint_descriptions:dict = {
 }
 
 setpoint_units:dict = {
-    "A": "C",
+    "B": "C",
     "D01": "C",
     "D03": "Mins",
     "D07": "C",
@@ -130,7 +141,7 @@ setpoint_units:dict = {
     "F10": "Pa",
     "F23": "V",
     "F24": "V",
-    "F25": "%",
+    "F25": "mins",
     "F27": "%",
     "F28": "%",
     "P14": "B",
@@ -163,7 +174,7 @@ class RegisterRange:
         return list(zip(self.keys, regs))
 
 
-class HPW300:
+class T300:
     def __init__(self, dev_name: str):
         self.instrument = minimalmodbus.Instrument(dev_name, 20)
         self.instrument.serial.baudrate = 19200
@@ -230,8 +241,8 @@ class HPW300:
                 print()
             desc = setpoint_descriptions.get(key, "")
             units = setpoint_units.get(key, "")
-            print(f"    {key: >3}  {desc: <30}  {self.values[key]} {units}")
+            print(f"    {key: >3}  {desc: <35}  {self.values[key]} {units}")
             prev = key[0]
 
-h = HPW300("/dev/ttyUSB0")
-h.dump()
+    def as_json(self) -> bytes:
+        return json.dumps(self.values).encode()
