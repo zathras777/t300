@@ -46,28 +46,72 @@ The python script presently queries for known setpoints and the date/time and du
 
 ``` shell
 $ python3 ./t300.py
-HPW 300 Information:
-  Date/Time Reported:  Monday 21/11/2022 @ 16:08 
+T-300 Information:
+  Date/Time Reported:  Thurs 24/11/2022 @ 21:38 
   Setpoints:
-    D01                                  44.1 C
-    D07                                  -1 C
+      A  Operation                            On 
 
-    F03                                  -15.0 C
-    F04                                  Off 
-    F05                                  35.0 C
-    F06                                  21.0 C
-    F07                                  5.0 
-    F08                                  60.0 C
-    F09                                  40 Pa
-    F14  ModBus Unit ID                  20 
-    F15  ModBus Baud Rate                19200 
-    F16  ModBus Parity                   Even 
-    F23                                  5.0 V
-    F24                                  5.0 V
-    F25                                  15 %
-    F26                                  Off 
-    F27                                  30 %
-    F28                                  100 %
+      B  Target Temperature                   49.0 C
+
+      C  Heat rod/Boost                       On 
+
+    D01  Temperature Heat Rod                 44.0 C
+    D02  Language                             English 
+    D03  Display Standby                      12 Mins
+    D04  Legionella Function                  On 
+    D05  PV Function                          Off 
+    D07  Heat rod on at temperature           -1 C
+    D08  Only heat rod, no Heat Pump          Off 
+
+    E14  Fan Speed                            30 %
+    E18  E-Valve                              24 
+
+    F01  Fan speed operation                  30 %
+    F02  Filter change interval               0 Months
+    F03  Cold operation temperature           -15.0 C
+    F04  Auxillary function                   Off 
+    F05  Floor heating enable temperature     35.0 C
+    F06  Floor heating setpoint               21.0 C
+    F07  Aux hysteresis                       5.0 
+    F08  Maximum temperature                  60.0 C
+    F09  Defrosting start temperature         40 Pa
+    F10  Defrosting start temperature, 80%    50 Pa
+    F11  Defrosting stop                      7.0 
+    F12  Delta T Mid T Low                    5.0 
+    F13  Compressor off hysteresis            5.0 
+    F14  ModBus Unit ID                       20 
+    F15  ModBus Baud Rate                     19200 
+    F16  ModBus Parity                        Even 
+    F17  Modbus Write Enabled                 Off 
+    F18  USB Enabled                          Off 
+    F19  Display Contrast                     5 
+    F22  PV Mode                              SG 
+    F23  PV Heat Rod Voltage                  5.0 V
+    F24  PV WP                                5.0 V
+    F25  PV WP Time                           13 mins
+    F26  Enable Fan Speed 1 and 2             Off 
+    F27  Fan Speed 1                          30 %
+    F28  Fan Speed 2                          100 %
+
+    P14  E-Valve                              -6.900000000000006 B
+    P19  E-Valve                              80.7 P
+
+    R02  Compressor                           Off 
+    R03  Supplemental P                       Off 
+    R04  Heat E                               On 
+    R05  Fan                                  Off 
+    R06  Defrost                              On 
+
+    S06  Defrost                              550 
+
+    T05  Temperature Before Evaporation       5.5 
+    T06  Evaporation Temperature              3.200000000000003 
+    T09  AUX Temperature                      156.89999999999998 
+    T11  Suction Temperature                  6.5 
+    T13  Compressor Temperature               39.599999999999994 
+    T14  E-Valve Temperature                  -6.900000000000006 
+    T20  Low Tank Temperature                 32.599999999999994 
+    T21  Mid Tank Temrpertaure                32.69999999999999
 ```
 
 ## Future Plans
