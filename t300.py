@@ -232,7 +232,7 @@ class T300:
     def dump(self):
         self.update_values()
         tm = self.get_time()
-        print("HPW 300 Information:")
+        print("T-300 Information:")
         print(f"  Date/Time Reported:  {tm['Weekday']} {tm['Day']}/{tm['Month']}/{tm['Year']} @ {tm['Hour']}:{tm['Mins']:02d} ")
         print("  Setpoints:")
         prev = ''
@@ -246,3 +246,26 @@ class T300:
 
     def as_json(self) -> bytes:
         return json.dumps(self.values).encode()
+
+    @classmethod
+    def dump_registers(__cls__):
+        """ Used to dump the settings data into a format suitable for
+            generation of the PDF.
+        """
+        regs = {3: {}, 4: {}}
+        for k,v in setpoints.items():
+            offs = 3 if v[2] != "FLOAT" else 4
+            regs[v[1]][v[0]] = [k, setpoint_descriptions[k], v[offs:]]
+
+        print("Register;Access;Setpoint;Description;Additional Information")
+        for code in sorted(regs.keys()):
+            for reg in sorted(regs[code].keys()):
+                print(f"{reg};{code};{regs[code][reg][0]};{regs[code][reg][1]};{regs[code][reg][2]}")
+
+
+# Included for development only.
+if __name__ == '__main__':
+    T300.dump_registers()
+
+    t = T300("/dev/ttyUSB0")
+    t.dump()
