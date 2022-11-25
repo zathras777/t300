@@ -64,6 +64,8 @@ setpoints:dict = {
     "T14": [29, 4, "FLOAT", 1, -100],
     "T20": [13, 4, "FLOAT", 1, -100],
     "T21": [14, 4, "FLOAT", 1, -100],
+    "HeatE": [48, 4, "FLOAT", 1],
+    "Software": [81, 4, "TEXT", "04d"],
 }
 
 setpoint_descriptions:dict = {
@@ -123,6 +125,8 @@ setpoint_descriptions:dict = {
     "T14": "E-Valve Temperature",
     "T20": "Low Tank Temperature",
     "T21": "Mid Tank Temrpertaure",
+    "HeatE": "Heat Rod Hours",
+    "Software": "Software Version",
 }
 
 setpoint_units:dict = {
@@ -146,6 +150,14 @@ setpoint_units:dict = {
     "F28": "%",
     "P14": "B",
     "P19": "P",
+    "T05": "C",
+    "T06": "C",
+    "T11": "C",
+    "T13": "C",
+    "T14": "C",
+    "T20": "C",
+    "T21": "C",
+    "Heat E": "Hours",
 }
 
 class RegisterRange:
@@ -215,6 +227,8 @@ class T300:
                     raw_val = "On" if raw_val == 1 else "Off"
                 elif reg_info[2] == "IDX":
                     raw_val = reg_info[3][raw_val]
+                elif reg_info[2] == "TEXT":
+                    raw_val = f"{raw_val:{reg_info[3]}}"
                 self.values[id] = raw_val
 
     def get_time(self) -> dict:
@@ -245,7 +259,9 @@ class T300:
             prev = key[0]
 
     def as_json(self) -> bytes:
-        return json.dumps(self.values).encode()
+        device_data = {'time': self.get_time()}
+        device_data.update(self.values)
+        return json.dumps(device_data).encode()
 
     @classmethod
     def dump_registers(__cls__):
@@ -255,7 +271,7 @@ class T300:
         regs = {3: {}, 4: {}}
         for k,v in setpoints.items():
             offs = 3 if v[2] != "FLOAT" else 4
-            regs[v[1]][v[0]] = [k, setpoint_descriptions[k], v[offs:]]
+            regs[v[1]][v[0]] = [k, setpoint_descriptions.get(k, ""), v[offs:]]
 
         print("Register;Access;Setpoint;Description;Additional Information")
         for code in sorted(regs.keys()):
