@@ -24,6 +24,8 @@ The configuration turned out to be the same as for the main Proxon module
 - Even Parity
 - 1 stop bit
 
+The T300 uses an identifier of 20.
+
 ## Setpoints & Registers
 
 Data was available on
