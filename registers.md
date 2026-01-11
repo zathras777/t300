@@ -1,5 +1,8 @@
 # Registers
 
+The following are the registers I have managed to verify and may not be correct.
+
+### Register Notes
 - The register numbers shown are "human readable", i.e. the first register is shown as 1. 
 - When querying the device the register numbers must be zero-referenced.
 - Holding registers are generally read/write, Input registers are Read Only.
@@ -20,23 +23,28 @@
 | 12 | Holding | Temperature for Heat Rod On | Negative temperature (Small) |
 | 13 | Holding | Heat Rod Only? | Boolean |
 | 25 | Holding | Filter Change Interval |
-| 26 | Holding | Legionella Function | Boolean
-| 27 | Holding | Cold Operation Temperature |
+| 26 | Holding | Legionella Function | Boolean |
+| 27 | Holding | Cold Operation Temperature | Temperature |
 | 28 | Holding | Auxillary Function | Boolean |
 
 ## Information
 | Register | Register Type | Purpose | Notes |
 |----------|---------------|---------|-------|
-| 11 | Input | Temperature before evaporation | Negative temperature (Large) |
-| 12 | Input | Evaporation temperature | Negative temperature (Large) |
-| 13 | Input | Low Tank Temperature | Negative temperature (Large) |
-| 14 | Input | Mid Tank Temperature | Negative temperature (Large) |
-| 15 | Input | Compressor Temperature | Negative temperature (Large) |
-| 16 | Input | Suction Temperature | Negative temperature (Large) |
-| 17 | Input | AUX temperature |  Negative temperature (Large) |
-| 18 | Input | ??? | Negative temperature (Large) |
-| 19 | Input | E Value | Negative temperature (Large) |
-| 22 | Input | Compressor |  |
+| 12 | Input | Temperature before evaporation | Negative temperature (Large) |
+| 13 | Input | Evaporation temperature | Negative temperature (Large) |
+| 14 | Input | Low Tank Temperature | Negative temperature (Large) |
+| 15 | Input | Mid Tank Temperature | Negative temperature (Large) |
+| 16 | Input | Compressor Temperature | Negative temperature (Large) |
+| 17 | Input | Suction Temperature | Negative temperature (Large) |
+| 18 | Input | AUX temperature |  Negative temperature (Large) |
+| 23 | Input | Supplemental P | Negative temperature |
+| 24 | Input | Heat E | Negative temperature |
+| 25 | Input | Compressor Running | Boolean |
+| 26 | Input | Supplemental E Operating | Boolean |
+| 27 | Input | Heat E Operating | Boolean |
+| 28 | Input | Fan Running | Boolean |
+| 29 | Input | Defrost Active | Boolean |
+| 39 | Input | Current Fan Speed |
 | 60 | Input | Seconds since Legionella Cycle | See note below |
 | 61 | Input | 2 hour blocks since Legionella Cycle | See note below |
 
